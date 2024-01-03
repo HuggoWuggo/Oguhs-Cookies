@@ -10,4 +10,8 @@ This is a reverse shell in python. This isn't as good as netcat, but is in pytho
 
 And BOOM! Reverse shell. Now, it is far from perfect but it is version 1.0, so hopefully I will make better vsersions later on.
 
+One of the major errors is the error that happens on the second command of every reverse shell. I am working trying to fix it, so stay tuned for the fixed version. 
+
+If you have any idea on how to fix this issue, letmy know in the issues section of the repository. 
+
 If you are getting an error with the client connecting to you, change the SERVR_PORT variable in both server.py and client.py scripts to any port above 1024 as long as they are the same. 
