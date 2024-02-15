@@ -39,4 +39,4 @@ while True:
     print(results)
 # close connection to the client and server connection
 client_socket.close()
-s.close
+s.close()
