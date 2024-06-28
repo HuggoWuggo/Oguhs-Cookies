@@ -9,6 +9,7 @@ class values {
         std::string hashval;
         std::string fileWriteName;
         size_t hash;
+        bool isFile = false;
 } vals;
 
 void argchecker(int argc, char *argv[]) {
@@ -24,6 +25,7 @@ void argchecker(int argc, char *argv[]) {
             }
             else if (strcmp(argv[i], "-w") == 0 || strcmp(argv[i], "--write") == 0)
             {
+                vals.isFile = true;
                 vals.fileWriteName = argv[i + 1];
                 std::cout << "The file you are writing to is called: " <<vals.fileWriteName << "\n" << std::endl;
             }
@@ -34,6 +36,7 @@ void argchecker(int argc, char *argv[]) {
 void writeFile() {
     std::ofstream out(vals.fileWriteName + ".txt");
     out << vals.hash;
+    out << "\n";
     out.close();
 }
 
@@ -48,6 +51,9 @@ int main(int argc, char *argv[])
 
         std::cout << vals.hash << std::endl;
 
-        writeFile();
+        if (vals.isFile == true)
+        {
+            writeFile();
+        }
     }
 }
