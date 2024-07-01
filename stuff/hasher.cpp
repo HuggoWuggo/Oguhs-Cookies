@@ -1,59 +1,66 @@
-#include <iostream>
-#include <unordered_map>
-#include <fstream>
-#include <string>
-#include <cstring>
+#include <crypto++/cryptlib.h>
+#define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1
 
-class values {
-    public:
-        std::string hashval;
-        std::string fileWriteName;
-        size_t hash;
-        bool isFile = false;
+#include <cstring>
+#include <iostream>
+#include <fstream>
+
+#include <crypto++/md5.h>
+#include <crypto++/hex.h>
+
+using namespace CryptoPP;
+
+class vals {
+	public:
+		std::string inp;
+		std::string out;
+
+		std::string file;
+
+		Weak::MD5 hash;
+
+		HexEncoder encoder;
+		HexDecoder decoder;
+
 } vals;
 
-void argchecker(int argc, char *argv[]) {
-    for (int i = 0; i < argc; i++)
-    {
-        if (i + 1 != argc)
-        {
-            if (strcmp(argv[i], "--value") == 0 || strcmp(argv[i], "-v") == 0)
-            {
-                vals.hashval = argv[i + 1];
-                std::cout << "You input was: " << vals.hashval << "\n" << std::endl;
-                i++;
-            }
-            else if (strcmp(argv[i], "-w") == 0 || strcmp(argv[i], "--write") == 0)
-            {
-                vals.isFile = true;
-                vals.fileWriteName = argv[i + 1];
-                std::cout << "The file you are writing to is called: " <<vals.fileWriteName << "\n" << std::endl;
-            }
-        }
-    }
+std::string encodeMD5(std::string val) {
+	byte digest[Weak::MD5::DIGESTSIZE];
+	
+	vals.hash.CalculateDigest(digest, (const byte*)vals.inp.c_str(), 
+	vals.inp.length());
+
+	vals.encoder.Attach( new StringSink(vals.out));
+	vals.encoder.Put(digest, sizeof(digest));
+	vals.encoder.MessageEnd();
+
+	return vals.out;
 }
 
-void writeFile() {
-    std::ofstream out(vals.fileWriteName + ".txt");
-    out << vals.hash;
-    out << "\n";
-    out.close();
+void argHandler(int argc, char *argv[]) {
+	for(int i = 0; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-v") == 0)
+		{
+			vals.inp = argv[i + 1];
+			std::cout << encodeMD5(vals.inp) << "\n";
+		}
+		else if (strcmp(argv[i], "-f") == 0)
+		{
+			vals.file = argv[i + 1];
+			std::ofstream out(vals.file + ".txt");
+			out << vals.out;
+			out << "\n";
+			out.close();
+		}
+	}
 }
 
-int main(int argc, char *argv[]) 
-{
-    if (argc != 1)
-    {
-        argchecker(argc, argv);
-        std::hash<std::string> hasher;
 
-        vals.hash = hasher(vals.hashval);
-
-        std::cout << vals.hash << std::endl;
-
-        if (vals.isFile == true)
-        {
-            writeFile();
-        }
-    }
+int main(int argc, char *argv[]) {
+	if (argc != 1)
+	{
+		argHandler(argc, argv);
+	}
+	return 0;
 }
