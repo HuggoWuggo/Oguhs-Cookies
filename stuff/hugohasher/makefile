@@ -1,3 +1,3 @@
 debug:
-	g++ src/*.cpp -o bin/debug/hugohasher -lcryptopp -I include
-	./bin/debug/hugohasher
+	g++ hugohasher,cpp -o hugohasher -lcryptopp
+	./hugohasher
