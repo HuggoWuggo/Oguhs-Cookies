@@ -1,1 +1,0 @@
-cd C:\Users\hugol\OneDrive\Documents\H\testing
