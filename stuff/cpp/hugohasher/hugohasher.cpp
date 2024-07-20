@@ -57,7 +57,7 @@ void argHandler(int argc, char *argv[]) {
 			std::cout << 
 			"WELCOME TO HUGO HASHER!\n\n" 
 			"-h = shows this message\n"
-			"-v = specfies what string you want to hash (use "" for multiple words)\n"
+			"-v = specfies what string you want to hash (use \"\" for multiple words)\n"
 			"-o = specifies what file you want to write to\n"
 			"-f = specfies if you want to hash the contents of a file (but not write it)\n\n"
 			"SPECIFY what hashing algorithm you want to use\n"
