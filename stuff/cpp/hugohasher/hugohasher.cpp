@@ -1,3 +1,4 @@
+//  By Hugo Lewczak
 #include <crypto++/cryptlib.h>
 #define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1
 
