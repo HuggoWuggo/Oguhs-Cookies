@@ -1,4 +1,4 @@
-#i love men
+# Made by Hugo Lewczak
 from random import randint
 import os
 from time import sleep
