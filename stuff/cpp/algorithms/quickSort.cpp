@@ -1,4 +1,4 @@
-// By Hugo :ewczak
+// By Hugo Lewczak
 
 #include <iostream>
 #include <vector>
