@@ -5,58 +5,43 @@
 
 using namespace std;
 
-int partition(vector<int> &vec, int low, int high) {
+int partition(vector<int>& arr, int start, int end) {
+    int pivot = arr[end];
+    int i = start - 1;
 
-    // Selecting last element as the pivot
-    int pivot = vec[high];
-
-    // Index of elemment just before the last element
-    // It is used for swapping
-    int i = (low - 1);
-
-    for (int j = low; j <= high - 1; j++) {
-
-        // If current element is smaller than or
-        // equal to pivot
-        if (vec[j] <= pivot) {
+    for (int j = start; j <= end - 1; j++) { // Corrected loop condition
+        if (arr[j] < pivot) {
             i++;
-            swap(vec[i], vec[j]);
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
+    i++;
+    int temp = arr[i];
+    arr[i] = arr[end];
+    arr[end] = temp;
 
-    // Put pivot to its position
-    swap(vec[i + 1], vec[high]);
-
-    // Return the point of partition
-    return (i + 1);
+    return i;
 }
 
-void quickSort(vector<int> &vec, int low, int high) {
+void quickSort(vector<int>& arr, int start, int end) {
+    if (end <= start) return; // base case
 
-    // Base case: This part will be executed till the starting
-    // index low is lesser than the ending index high
-    if (low < high) {
-
-        // pi is Partitioning Index, arr[p] is now at
-        // right place
-        int pi = partition(vec, low, high);
-
-        // Separately sort elements before and after the
-        // Partition Index pi
-        quickSort(vec, low, pi - 1);
-        quickSort(vec, pi + 1, high);
-    }
+    int pivot = partition(arr, start, end);
+    quickSort(arr, start, pivot - 1);
+    quickSort(arr, pivot + 1, end);
 }
 
 int main() {
-    vector<int> vec = {10, 7, 8, 9, 1, 5};
-    int n = vec.size();
-    
-      // Calling quicksort for the vector vec
-    quickSort(vec, 0, n - 1);
+    vector<int> arr = {9, 4, 10, 2, 7, 6, 3, 8, 1, 5};
 
-    for (auto i : vec) {
-        cout << i << " ";
+    quickSort(arr, 0, arr.size() - 1);
+
+    for (int i : arr) {
+        cout << i << " "; // Fixed output
     }
+    cout << endl; // Added for cleaner output
+
     return 0;
 }
