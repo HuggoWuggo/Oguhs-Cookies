@@ -1,3 +1,5 @@
+# Made By Thomas McLean
+
 import pygame as py
 
 def Graph(data_set=[], draw_connecting_lines=True):
