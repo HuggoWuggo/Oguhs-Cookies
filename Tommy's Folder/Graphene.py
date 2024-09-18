@@ -1,8 +1,6 @@
-# Made By Thomas McLean
-
 import pygame as py
 
-def Graph(data_set=[], draw_connecting_lines=True):
+def graph(data_set=[], draw_connecting_lines=True, dot_size=15):
     run = True
 
     if data_set == []:
@@ -35,7 +33,7 @@ def Graph(data_set=[], draw_connecting_lines=True):
         draw_menu(screen, width, height)
 
         if len(data_set) > 0:
-            plot_data(screen, width, height, data_set, draw_connecting_lines)
+            plot_data(screen, width, height, data_set, draw_connecting_lines, dot_size)
 
         for event in py.event.get():
             if event.type == py.QUIT:
@@ -48,7 +46,7 @@ def draw_menu(screen, width, height):
     py.draw.line(screen, 'black', (100, height - 100), (width - 100, height - 100), 5) # x axis
     py.draw.line(screen, 'black', (100, height - 100), (100, 100), 5) # y axis
 
-def plot_data(screen, width, height, data_set, draw_connecting_lines):
+def plot_data(screen, width, height, data_set, draw_connecting_lines, dot_size):
     x_max_dist = width - 200
     y_max_dist = height - 200
 
@@ -59,12 +57,17 @@ def plot_data(screen, width, height, data_set, draw_connecting_lines):
     for c in range(len(data_set)):
         distx = x_max_dist / len(data_set) * (c + 1)
         disty = y_spread * data_set[c]
-        py.draw.circle(screen, 'black', (100 + distx, height - 100 - disty), 15)
-        py.draw.line(screen, 'black', (100 + distx, height - 125), (100 + distx, height - 75), 3)
+        py.draw.circle(screen, 'black', (100 + distx, height - 100 - disty), dot_size)
+        py.draw.line(screen, 'black', (100 + distx, height - 115), (100 + distx, height - 85), 3)
         point_pos.append((100 + distx, height - 100 - disty))
 
-    for i in range(max(data_set)):
-        py.draw.line(screen, 'black', (75, height - 100 - y_spread * (i + 1)), (125, height - 100 - y_spread * (i + 1)), 3)
+    if max(data_set) > 10:
+        for i in range(10):
+            py.draw.line(screen, 'black', (85, height - 100 - y_max_dist / 10 * (i + 1)), (115, height - 100 - y_max_dist / 10 * (i + 1)), 3)
+    
+    else:
+        for i in range(max(data_set)):
+            py.draw.line(screen, 'black', (85, height - 100 - y_spread * (i + 1)), (115, height - 100 - y_spread * (i + 1)), 3)
 
     if draw_connecting_lines:
         py.draw.lines(screen, 'black', False, point_pos, 5)
