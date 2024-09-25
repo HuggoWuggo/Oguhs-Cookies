@@ -1,3 +1,5 @@
+# Made By Thomas McLean
+
 import pygame as py, sys
 
 def init(data_set):
