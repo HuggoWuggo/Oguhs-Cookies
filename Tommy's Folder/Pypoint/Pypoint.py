@@ -1,6 +1,4 @@
-# Made By Thomas McLean
-
-def diff(points=[], radius=0):
+def inrange(points=[], radius=0):
     if points == [] or radius == 0:
         print('Missing Arguments Of points Or radius')
         return
@@ -15,3 +13,15 @@ def diff(points=[], radius=0):
     
     else:
         return False
+
+def diff(points):
+    if points == []:
+        print('Missing Argument Of points')
+        return
+
+    difference = [points[1][0] - points[0][0], points[1][1] - points[0][1]]
+    
+    for i in range(len(difference)):
+        if difference[i] < 0: difference[i] *= -1
+
+    return difference
