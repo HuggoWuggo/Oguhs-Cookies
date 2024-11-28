@@ -1,6 +1,6 @@
 import math
 
-SQRT_CONSTANT: int = 3131
+SQRT_CONSTANT: int = int(input('Enter Number: '))
 last_approximation: float = 0
 perfect_square: int = 1
 TRUE_VALUE: float = math.sqrt(SQRT_CONSTANT)
