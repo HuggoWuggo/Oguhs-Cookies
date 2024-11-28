@@ -1,6 +1,3 @@
-import os
-os.system('color')
-
 class ColourNotFoundError(Exception):
     """Raised if the specified colour cannot be found"""
 
@@ -8,6 +5,8 @@ class EmphasisNotFoundError(Exception):
     """Raised if the specified emphasis cannot be found"""
 
 def __get_colour(colour):
+    """Function for returning the corresponding colour escape character"""
+
     match colour.lower():
         case 'red':
             return '\033[31m'
@@ -59,6 +58,8 @@ def __get_colour(colour):
             raise ColourNotFoundError(f"The colour '{colour}' could not be found")
 
 def __get_emphasis(emphasis: tuple) -> str:
+    """Function for returning the corresponding emphasis escape character"""
+
     options = ''
     for option in emphasis:
         match option:
@@ -74,7 +75,12 @@ def __get_emphasis(emphasis: tuple) -> str:
 
 def pycolour(colour: str, text: str, *emphasis) -> None:
     """
-    Prints the specified text in the specified colour to the console.
-    Prints the text with emphasis if specified as well
+    A function that prints text to the console with the specified colour
+    and emphasis
+
+    :param colour: The colour the text will be printed in
+    :param text: The text that will be printed
+    :param emphasis: The optional emphasis that the text will be printed with
     """
+
     print(f'{__get_emphasis(emphasis)}{__get_colour(colour)}{text}{__get_colour("endc")}') if emphasis else print(f'{__get_colour(colour)}{text}{__get_colour("endc")}')
