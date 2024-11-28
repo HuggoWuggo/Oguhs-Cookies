@@ -73,5 +73,8 @@ def __get_emphasis(emphasis: tuple) -> str:
     return options
 
 def pycolour(colour: str, text: str, *emphasis) -> None:
-    """Wow thats crazy"""
+    """
+    Prints the specified text in the specified colour to the console.
+    Prints the text with emphasis if specified as well
+    """
     print(f'{__get_emphasis(emphasis)}{__get_colour(colour)}{text}{__get_colour("endc")}') if emphasis else print(f'{__get_colour(colour)}{text}{__get_colour("endc")}')
