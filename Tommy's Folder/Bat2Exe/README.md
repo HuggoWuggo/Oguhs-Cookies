@@ -1,6 +1,6 @@
 :INSTRUCTIONS:
 
-In order to use the 'Bat2Exe Context.py' file, a new context action must be created in the .bat right click context menu.
+In order to use the 'Bat2Exe Context.py' and 'Bat2Exe.exe' files, a new context action must be created in the .bat right click context menu.
 This is done by editing keys in the Registry Editor app.
 
 1. Navigate to the directory 'Computer\HKEY_CLASSES_ROOT\batfile' in the Registry Editor
